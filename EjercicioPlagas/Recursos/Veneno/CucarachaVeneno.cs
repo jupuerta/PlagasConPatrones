@@ -1,4 +1,6 @@
-﻿using EjercicioPlagas.Recursos.Veneno.Builder;
+﻿using EjercicioPlagas.Recursos.Veneno.Bridge.EstadoVeneno;
+using EjercicioPlagas.Recursos.Veneno.Bridge.TipoVeneno;
+using EjercicioPlagas.Recursos.Veneno.Builder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +30,7 @@ namespace EjercicioPlagas.Recursos.Veneno {
 
         public void AddTipoVeneno()
         {
-            Veneno.Tipoveneno = "Uranio";
+            Veneno.Tipoveneno = new Radioactivo(new Gaseoso(30));
         }
 
         public double Gasto()
