@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EjercicioPlagas.Composite
 {
+    [Serializable()]
     public class Factura : IServicio
     {
         public Cliente ClienteAsociado { get; set; }

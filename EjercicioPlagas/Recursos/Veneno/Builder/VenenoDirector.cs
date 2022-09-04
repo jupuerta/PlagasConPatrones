@@ -8,9 +8,9 @@ namespace EjercicioPlagas.Recursos.Veneno.Builder
 {
     public class VenenoDirector
     {
-        private IVenenoBuilder _builder;
+        private VenenoBuilder _builder;
 
-        public VenenoDirector(IVenenoBuilder _builder)
+        public VenenoDirector(VenenoBuilder _builder)
         {
             this._builder = _builder;
         }
@@ -23,7 +23,7 @@ namespace EjercicioPlagas.Recursos.Veneno.Builder
             _builder.AddGasto();
         }
 
-        public IVenenoBuilder GetVeneno()
+        public VenenoBuilder GetVeneno()
         {
             return _builder;
         }

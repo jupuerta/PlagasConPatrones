@@ -4,6 +4,7 @@ using System.Text;
 
 namespace EjercicioPlagas.Recursos.Veneno.Bridge.EstadoVeneno
 {
+    [Serializable()]
     public class Liquido : IEstadoVeneno
     {
         public int Concentracion { get; set; }

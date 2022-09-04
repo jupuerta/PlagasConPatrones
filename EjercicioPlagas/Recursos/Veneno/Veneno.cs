@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace EjercicioPlagas.Recursos.Veneno
 {
+    [Serializable()]
     public class Veneno
     {
-        public String Animal { get; set; }
-        public ATipoVeneno Tipoveneno { get; set; }
+        public string? Animal { get; set; }
+        public ATipoVeneno? Tipoveneno { get; set; }
         public double Cantidad { get; set; }
         public double Gasto { get; set; }
     }

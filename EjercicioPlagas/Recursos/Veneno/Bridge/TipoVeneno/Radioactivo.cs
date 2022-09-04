@@ -5,6 +5,7 @@ using System.Text;
 
 namespace EjercicioPlagas.Recursos.Veneno.Bridge.TipoVeneno
 {
+    [Serializable()]
     public class Radioactivo : ATipoVeneno
     {
         public Radioactivo(IEstadoVeneno estadoVeneno)

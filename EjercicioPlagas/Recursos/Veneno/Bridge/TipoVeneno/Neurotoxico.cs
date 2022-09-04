@@ -5,12 +5,13 @@ using System.Text;
 
 namespace EjercicioPlagas.Recursos.Veneno.Bridge.TipoVeneno
 {
+    [Serializable()]
     public class Neurotoxico:ATipoVeneno
     {
         public Neurotoxico(IEstadoVeneno estadoVeneno)
         {
             this.EstadoVeneno = estadoVeneno;
-            this.PotenciaBase = 90;
+            this.PotenciaBase = 50;
         }
     }
 }

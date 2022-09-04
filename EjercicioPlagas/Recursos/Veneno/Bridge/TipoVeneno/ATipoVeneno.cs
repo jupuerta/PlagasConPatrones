@@ -5,13 +5,13 @@ using System.Text;
 
 namespace EjercicioPlagas.Recursos.Veneno.Bridge.TipoVeneno
 {
-    public class ATipoVeneno
+    public abstract class ATipoVeneno
     {
         protected IEstadoVeneno EstadoVeneno { set; get; }
         protected int PotenciaBase { get; set; }
         public virtual int PotenciaVeneno()
         {
-            return (PotenciaBase + EstadoVeneno.ConcentracionActivo()) / 2;
+            return (PotenciaBase + EstadoVeneno.Concentracion) / 2;
         }
     }
 }

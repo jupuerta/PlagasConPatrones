@@ -8,6 +8,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestDesinfeccion", "TestDesinfeccion\TestDesinfeccion.csproj", "{18DA551B-0BD3-4CC4-8E0B-A8C5BF546AC3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsolaPesticidas", "ConsolaPesticidas\ConsolaPesticidas.csproj", "{EDDC3EAC-C581-442B-9884-0EC4A0161CA3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E1268D55-592F-46B3-9254-460197EFD0B8} = {E1268D55-592F-46B3-9254-460197EFD0B8}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaz", "Interfaz\Interfaz.csproj", "{1A00F9DB-42C9-4777-AE92-FE8871F55FE3}"
 EndProject

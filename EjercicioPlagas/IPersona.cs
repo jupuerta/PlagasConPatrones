@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace EjercicioPlagas {
+
     public interface IPersona {
         public String Name { get; set; }
         public String DNI { get; set; }

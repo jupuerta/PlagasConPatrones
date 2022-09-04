@@ -9,31 +9,30 @@ using System.Threading.Tasks;
 
 namespace EjercicioPlagas.Recursos.Veneno {
     [Serializable()]
-    public class CucarachaVeneno : IVenenoBuilder
+    public class CucarachaVeneno : VenenoBuilder
     {
-        public Veneno Veneno { get; set; }
-
-        public void AddAnimal()
+        public override void AddAnimal()
         {
+            Veneno = new Veneno();
             Veneno.Animal = "Cucaracha"; 
         }
 
-        public void AddCantidad()
+        public override void AddCantidad()
         {
             Veneno.Cantidad = 0.1;
         }
 
-        public void AddGasto()
+        public override void AddGasto()
         {
             Veneno.Gasto = 2;
         }
 
-        public void AddTipoVeneno()
+        public override void AddTipoVeneno()
         {
             Veneno.Tipoveneno = new Radioactivo(new Gaseoso(30));
         }
 
-        public double Gasto()
+        public override double Gasto()
         {
             return Veneno.Gasto;
         }

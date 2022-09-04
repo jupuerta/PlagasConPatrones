@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace EjercicioPlagas.Composite
 {
+    [Serializable()]
     public class Servicio : IServicio
     {
         public string Nombre { get; set; }
