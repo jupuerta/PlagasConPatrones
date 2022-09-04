@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 namespace EjercicioPlagas.Trabajadores {
     [Serializable()]
     public class JefeEquipo : ITrabajador {
-        private List<Peon> equipoList { get; set; }
+        private List<ITrabajador> equipoList { get; set; }
         public double Ingreso { get; set; }
 
         public double gastoEquipo { get; set; }
 
         public JefeEquipo(double Ingresod) {
-            equipoList = new List<Peon>();
+            equipoList = new List<ITrabajador>();
             Ingreso = Ingresod;
             gastoEquipo = Ingreso;
         }
@@ -22,7 +22,7 @@ namespace EjercicioPlagas.Trabajadores {
             return Ingreso;
         }
 
-        public void addPeon(Peon p) {
+        public void addTrabajador(ITrabajador p) {
             TrabajadorSpecification spec = new TrabajadorSpecification();
             if (spec.IsSatisfiedBy(p)) {
                 gastoEquipo += p.IngresoServicio();

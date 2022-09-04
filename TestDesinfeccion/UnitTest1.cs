@@ -6,6 +6,7 @@ using EjercicioPlagas.Composite;
 using EjercicioPlagas.Recursos.Veneno.Builder;
 using EjercicioPlagas.Recursos.Veneno.Bridge.TipoVeneno;
 using EjercicioPlagas.Recursos.Veneno.Bridge.EstadoVeneno;
+using EjercicioPlagas.Trabajadores.FactoyMethod;
 
 namespace TestDesinfeccion
 {
@@ -17,10 +18,13 @@ namespace TestDesinfeccion
         /// </summary>
         [TestMethod]
         public void TestGastoEquipo() {
-            JefeEquipo jefe = new JefeEquipo(45);
-            jefe.addPeon(new Peon(20));
-            jefe.addPeon(new Peon(15));
-            jefe.addPeon(new Peon(20));
+            ITrabajadorFactory jefeEquipoFactory = new JefeEquipoFactory();
+            JefeEquipo jefe = (JefeEquipo)jefeEquipoFactory.Create(45);
+
+            ITrabajadorFactory peonFactory = new PeonFactory();
+            jefe.addTrabajador(peonFactory.Create(20));
+            jefe.addTrabajador(peonFactory.Create(15));
+            jefe.addTrabajador(peonFactory.Create(20));
 
             Assert.AreEqual(100, jefe.gastoEquipo);
         }
@@ -30,12 +34,16 @@ namespace TestDesinfeccion
         /// </summary>
         [TestMethod]
         public void TestServicioSinRecursos() {
-            JefeEquipo jefe = new JefeEquipo(45);
-            jefe.addPeon(new Peon(20));
-            jefe.addPeon(new Peon(15));
-            jefe.addPeon(new Peon(20));
+            ITrabajadorFactory jefeEquipoFactory = new JefeEquipoFactory();
+            JefeEquipo jefe = (JefeEquipo)jefeEquipoFactory.Create(45);
 
-            Gerente gerente = new Gerente(15);
+            ITrabajadorFactory peonFactory = new PeonFactory();
+            jefe.addTrabajador(peonFactory.Create(20));
+            jefe.addTrabajador(peonFactory.Create(15));
+            jefe.addTrabajador(peonFactory.Create(20));
+
+            ITrabajadorFactory GerenteFactory = new GerenteFactory();
+            Gerente gerente = (Gerente)GerenteFactory.Create(15);
 
             Servicio servicio = new Servicio("PruebaServicio", jefe, gerente);
 
@@ -47,13 +55,16 @@ namespace TestDesinfeccion
         /// </summary>
         [TestMethod]
         public void TestServicioConRecursos() {
-            JefeEquipo jefe = new JefeEquipo(45);
-            jefe.addPeon(new Peon(20));
-            jefe.addPeon(new Peon(15));
-            jefe.addPeon(new Peon(20));
+            ITrabajadorFactory jefeEquipoFactory = new JefeEquipoFactory();
+            JefeEquipo jefe = (JefeEquipo)jefeEquipoFactory.Create(45);
 
+            ITrabajadorFactory peonFactory = new PeonFactory();
+            jefe.addTrabajador(peonFactory.Create(20));
+            jefe.addTrabajador(peonFactory.Create(15));
+            jefe.addTrabajador(peonFactory.Create(20));
 
-            Gerente gerente = new Gerente(15);
+            ITrabajadorFactory GerenteFactory = new GerenteFactory();
+            Gerente gerente = (Gerente)GerenteFactory.Create(15);
 
             Servicio servicio = new Servicio("PruebaServicio", jefe, gerente);
             servicio.AddRecurso(new Mascarilla());
@@ -68,9 +79,23 @@ namespace TestDesinfeccion
         [TestMethod]
         public void TestBridge()
         {
-            ATipoVeneno tipo = new Neurotoxico(new Liquido(50));
-            Assert.IsNotNull(tipo);
-            Assert.AreEqual(50, tipo.PotenciaVeneno());
+            Neurotoxico liquido = new Neurotoxico(new Liquido(50));
+            Assert.IsNotNull(liquido);
+            Assert.AreEqual(50, liquido.PotenciaVeneno());
+            IEstadoVeneno estadoVeneno1 = liquido.EstadoVeneno;
+            Assert.AreEqual(2, estadoVeneno1.Densidad());
+
+            Radioactivo solido = new Radioactivo(new Solido(80));
+            Assert.IsNotNull(solido);
+            Assert.AreEqual(85, solido.PotenciaVeneno());
+            IEstadoVeneno estadoVeneno2 = solido.EstadoVeneno;
+            Assert.AreEqual(3, estadoVeneno2.Densidad());
+
+            ATipoVeneno gaseoso = new Hemotoxico(new Gaseoso(20));
+            Assert.IsNotNull(gaseoso);
+            Assert.AreEqual(45, gaseoso.PotenciaVeneno());
+            IEstadoVeneno estadoVeneno3 = gaseoso.EstadoVeneno;
+            Assert.AreEqual(1, estadoVeneno3.Densidad());
         }
 
         /// <summary>
@@ -99,12 +124,16 @@ namespace TestDesinfeccion
         /// </summary>
         [TestMethod]
         public void TestServicio() {
-            JefeEquipo jefe = new JefeEquipo(45);
-            jefe.addPeon(new Peon(20));
-            jefe.addPeon(new Peon(15));
-            jefe.addPeon(new Peon(20));
+            ITrabajadorFactory jefeEquipoFactory = new JefeEquipoFactory();
+            JefeEquipo jefe = (JefeEquipo)jefeEquipoFactory.Create(45);
 
-            Gerente gerente = new Gerente(15);
+            ITrabajadorFactory peonFactory = new PeonFactory();
+            jefe.addTrabajador(peonFactory.Create(20));
+            jefe.addTrabajador(peonFactory.Create(15));
+            jefe.addTrabajador(peonFactory.Create(20));
+
+            ITrabajadorFactory GerenteFactory = new GerenteFactory();
+            Gerente gerente = (Gerente)GerenteFactory.Create(15);
 
             Servicio servicio = new Servicio("PruebaServicio", jefe, gerente);
             servicio.AddRecurso(new Mascarilla());
@@ -129,16 +158,21 @@ namespace TestDesinfeccion
         [TestMethod]
         public void TestFactura()
         {
-            JefeEquipo jefe = new JefeEquipo(45);
-            jefe.addPeon(new Peon(20));
-            jefe.addPeon(new Peon(15));
-            jefe.addPeon(new Peon(20));
+            ITrabajadorFactory jefeEquipoFactory = new JefeEquipoFactory();
+            JefeEquipo jefe = (JefeEquipo)jefeEquipoFactory.Create(45);
 
-            Gerente gerente = new Gerente(15);
+            ITrabajadorFactory peonFactory = new PeonFactory();
+            jefe.addTrabajador(peonFactory.Create(20));
+            jefe.addTrabajador(peonFactory.Create(15));
+            jefe.addTrabajador(peonFactory.Create(20));
+
+            ITrabajadorFactory GerenteFactory = new GerenteFactory();
+            Gerente gerente = (Gerente)GerenteFactory.Create(15);
 
             Servicio servicio = new Servicio("PruebaServicio", jefe, gerente);
             servicio.AddRecurso(new Mascarilla());
             servicio.AddRecurso(new Furgo());
+            servicio.AddRecurso(new Coche());
 
             VenenoDirector venenoCucaracha = new VenenoDirector(new CucarachaVeneno());
             venenoCucaracha.HacerVeneno();
@@ -154,8 +188,8 @@ namespace TestDesinfeccion
             Factura factura = new Factura(cliente);
             factura.addServicio(servicio);
 
-            Assert.AreEqual(171.5, Math.Round(factura.Gastos, 2));
-            Assert.AreEqual(25.72, Math.Round(factura.Facturado, 2));
+            Assert.AreEqual(211.5, Math.Round(factura.Gastos, 2));
+            Assert.AreEqual(31.72, Math.Round(factura.Facturado, 2));
         }
     }
 }

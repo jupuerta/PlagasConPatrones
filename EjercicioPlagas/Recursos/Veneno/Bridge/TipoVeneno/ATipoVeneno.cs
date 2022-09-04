@@ -7,7 +7,7 @@ namespace EjercicioPlagas.Recursos.Veneno.Bridge.TipoVeneno
 {
     public abstract class ATipoVeneno
     {
-        protected IEstadoVeneno EstadoVeneno { set; get; }
+        public IEstadoVeneno EstadoVeneno { set; get; }
         protected int PotenciaBase { get; set; }
         public virtual int PotenciaVeneno()
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EjercicioPlagas.Trabajadores.FactoyMethod
 {
-    internal class GerenteFactory : ITrabajadorFactory
+    public class GerenteFactory : ITrabajadorFactory
     {
         public ITrabajador Create(int salario)
         {

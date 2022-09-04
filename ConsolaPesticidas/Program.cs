@@ -8,15 +8,20 @@ using EjercicioPlagas.Trabajadores;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using EjercicioPlagas;
+using EjercicioPlagas.Trabajadores.FactoyMethod;
 
 Console.WriteLine("Hello, World!");
 
-JefeEquipo jefe = new JefeEquipo(45);
-jefe.addPeon(new Peon(20));
-jefe.addPeon(new Peon(15));
-jefe.addPeon(new Peon(20));
+ITrabajadorFactory jefeEquipoFactory = new JefeEquipoFactory();
+JefeEquipo jefe = (JefeEquipo)jefeEquipoFactory.Create(45);
 
-Gerente gerente = new Gerente(15);
+ITrabajadorFactory peonFactory = new PeonFactory();
+jefe.addTrabajador(peonFactory.Create(20));
+jefe.addTrabajador(peonFactory.Create(15));
+jefe.addTrabajador(peonFactory.Create(20));
+
+ITrabajadorFactory GerenteFactory = new GerenteFactory();
+Gerente gerente = (Gerente)GerenteFactory.Create(15);
 
 Servicio servicio = new Servicio("PruebaServicio", jefe, gerente);
 servicio.AddRecurso(new Mascarilla());
